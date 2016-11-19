@@ -12,6 +12,8 @@ class HistoryViewController: UITableViewController {
 
     @IBOutlet var table: UITableView!
     
+    var model: EctiviModel = EctiviModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,24 +35,24 @@ class HistoryViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return sections.count
+        return model.sections.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return history[section].count
+        return model.history[section].count
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+        return model.sections[section]
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let entry = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomTableViewCell
         
         // Configure the cell
-        entry.time.text = history[indexPath.section][indexPath.row].time
-        entry.ammount.text = String(history[indexPath.section][indexPath.row].ammount) + " ml"
+        entry.time.text = model.history[indexPath.section][indexPath.row].time
+        entry.ammount.text = String(model.history[indexPath.section][indexPath.row].ammount) + " ml"
         entry
             .backgroundColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
 
@@ -67,7 +69,7 @@ class HistoryViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            history[indexPath.section].remove(at: indexPath.row)
+            model.history[indexPath.section].remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

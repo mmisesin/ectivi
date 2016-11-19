@@ -8,16 +8,10 @@
 
 import UIKit
 
-var sections: [String] = ["Today", "Yesterday"]
-
-var history: [[(time: String, ammount: Int)]] = [[("6.00 pm", 200), ("4.00 pm", 400), ("3.00 pm", 500)], [("8.00 pm", 200), ("6.00 pm", 400), ("12.00 pm", 500)]]
-
-var goal = 2000
-
-var total = 0
-
 @IBDesignable
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var model: EctiviModel = EctiviModel()
     
     @IBOutlet var mainView: UIView!
     
@@ -35,10 +29,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let calendar = NSCalendar.current
         let hour = calendar.component(.hour, from: date as Date)
         let minutes = calendar.component(.minute, from: date as Date)
-        history[0].insert(("\(hour).\(minutes)", 200), at: 0)
-        total += 200
-        mainIndicator.text = "\(total) ml"
-        goalLabel.text = "\(goal - total) ml to go"
+        model.history[0].insert(("\(hour).\(minutes)", 200), at: 0)
+        model.total += 200
+        mainIndicator.text = "\(model.total) ml"
+        goalLabel.text = "\(model.goal - model.total) ml to go"
         historyPreview.reloadData()
     }
     
@@ -50,8 +44,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let entry = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomTableViewCell
         
         // Configure the cell
-        entry.time.text = history[0][0].time
-        entry.ammount.text = String(history[0][0].ammount) + " ml"
+        entry.time.text = model.history[0][0].time
+        entry.ammount.text = String(model.history[0][0].ammount) + " ml"
         entry
             .backgroundColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
         return entry
@@ -60,7 +54,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            history[indexPath.section].remove(at: indexPath.row)
+            model.history[indexPath.section].remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.insertRows(at: [indexPath], with: .fade)
             tableView.reloadData()
@@ -86,13 +80,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         var totalTemp = 0
-        for (_, entryAmmount) in history[0] {
+        for (_, entryAmmount) in model.history[0] {
             
             totalTemp += entryAmmount
         }
-        total = totalTemp
-        mainIndicator.text = "\(total) ml"
-        goalLabel.text = "\(goal - total) ml to go"
+        model.total = totalTemp
+        mainIndicator.text = "\(model.total) ml"
+        goalLabel.text = "\(model.goal - model.total) ml to go"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
