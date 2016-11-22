@@ -13,6 +13,8 @@ class EctiviModel {
     
     var goal = 2000
     
+    var context: NSManagedObjectContext? = nil
+    
     var history: [(day: String, list: [(time: String, ammount: Int)])] = [("", [])]
     
     var sections: [String] = ["Today", "Yesterday"]
@@ -36,7 +38,6 @@ class EctiviModel {
         }
         history[0].list.insert(("\(hour).\(minutes)", entryAmmount), at: 0)
         total += entryAmmount
-        print (history)
     }
     
     func insertEntry(ammount: Int, context: NSManagedObjectContext) {
@@ -49,7 +50,7 @@ class EctiviModel {
         do {
             try context.save()
         } catch {
-            print("Error")
+            print("Error while inserting in insertEntry")
         }
     }
     
@@ -59,29 +60,44 @@ class EctiviModel {
         do {
             let results = try context.fetch(request)
             if results.count > 0{
-                for result in results as! [NSManagedObject]{
-                    if let time = result.value(forKey: "time"){
-                        print(time)
-                    }
                     return results as! [NSManagedObject]
-                }
             }
         } catch {
-            print("Error")
+            print("Error while fetching in getEntries")
         }
         return []
     }
     
-    func removeEntry(context: NSManagedObjectContext, index: Int) {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Entry")
-        request.returnsObjectsAsFaults = false
-        do {
-            let results = try context.fetch(request)
-            if results.count > 0 {
-                context.delete(results[index] as! NSManagedObject)
+    func removeEntry(index: Int) {
+        if let context = self.context {
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Entry")
+            request.returnsObjectsAsFaults = false
+            do {
+                let results = try context.fetch(request)
+                if results.count > 0 {
+                    context.delete(results[results.endIndex - index - 1] as! NSManagedObject)
+                }
+            } catch {
+                print("Error while deleting in removeEntry")
             }
-        } catch {
-            print("Error while deleting an object")
+            do {
+                try context.save()
+            } catch {
+                print("Error while saving the context")
+            }
         }
     }
+    
+    func processEntry(entry: NSManagedObject) -> (day: String, time: String){
+        let date = entry.value(forKey: "time")
+        
+        let calendar = NSCalendar.current
+        
+        let day = "\(calendar.component(.month, from: date as! Date)).\(calendar.component(.day, from: date as! Date)).\(calendar.component(.year, from: date as! Date))"
+        
+        let time = "\(calendar.component(.hour, from: date as! Date)):\(calendar.component(.minute, from: date as! Date))"
+        
+        return (day, time)
+    }
+    
 }

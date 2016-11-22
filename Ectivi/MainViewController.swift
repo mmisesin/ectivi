@@ -14,8 +14,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var model: EctiviModel = EctiviModel()
     
-    var context: NSManagedObjectContext? = nil
-    
     @IBOutlet var mainView: UIView!
     
     @IBOutlet weak var addButton: UIButton!
@@ -25,14 +23,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var goalLabel: UILabel!
     
     @IBOutlet weak var historyPreview: UITableView!
-    @IBAction func historyButton() {
-        performSegue(withIdentifier: "toHistory", sender: self)
-    }
-
-    @IBAction func addBytton(_ sender: UIButton) {
+    
+    @IBAction func entryButton() {
         model.addWaterEntry()
-        if let tempContext = self.context {
-            model.insertEntry(ammount: 200, context: tempContext)
+        
+        if let context = model.context {
+            
+            model.insertEntry(ammount: model.entryAmmount, context: context)
+            
         }
         startConfiguration()
         historyPreview.reloadData()
@@ -51,8 +49,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if model.history.count != 0 {
             
             entry.time.text = model.history[0].list[indexPath.row].time
+            
             entry.ammount.text = String(model.history[0].list[indexPath.row].ammount) + " ml"
+            
         }
+        
         entry
             .backgroundColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
         return entry
@@ -61,23 +62,31 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.context = appDelegate.persistentContainer.viewContext
-        let database = model.getEntries(context: self.context!) as! [NSManagedObject]
-        for entry in database {
-            let date = entry.value(forKey: "time")
-            let calendar = NSCalendar.current
-            let day = calendar.component(.day, from: date as! Date)
-            let hour = calendar.component(.hour, from: date as! Date)
-            let minutes = calendar.component(.minute, from: date as! Date)
-            let string = "\(hour):\(minutes)"
-            if String(day) == model.history[0].day {
-                model.history[0].list.insert((string, entry.value(forKey: "ammount") as! Int), at: 0)
-            } else {
-            model.history.insert((String(day), []), at: 0)
-                model.history[0].list.insert((string, entry.value(forKey: "ammount") as! Int), at: 0)
+        
+        model.context = appDelegate.persistentContainer.viewContext
+        
+        if let context = model.context {
+            
+            let database = model.getEntries(context: context) as! [NSManagedObject]
+            
+            for entry in database {
+                
+                let (day, time) = model.processEntry(entry: entry)
+                
+                if day == model.history[0].day {
+                    
+                    model.history[0].list.insert((time, entry.value(forKey: "ammount") as! Int), at: 0)
+                    
+                } else {
+                    
+                    model.history.insert((String(day), []), at: 0)
+                    
+                    model.history[0].list.insert((time, entry.value(forKey: "ammount") as! Int), at: 0)
+                    
+                }
             }
         }
-        // Do any additional setup after loading the view, typically from a nib.
+                // Do any additional setup after loading the view, typically from a nib.
         UINavigationBar.appearance().tintColor = UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1)
         historyPreview.backgroundColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
         mainView.backgroundColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
@@ -86,12 +95,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            
+            self.model.removeEntry(index: indexPath.row)
+            
             self.model.history[indexPath.section].list.remove(at: indexPath.row)
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
             if self.model.history[indexPath.section].list.isEmpty {
+                
                 self.model.history.remove(at: indexPath.section)
+                
             }
+            
             self.startConfiguration()
+            
         }
         
         delete.backgroundColor = UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1)
@@ -120,7 +138,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         var totalTemp = 0
         if model.history.count != 0 {
             for (_, entryAmmount) in model.history[0].list {
-                
                 totalTemp += entryAmmount
             }
         }
