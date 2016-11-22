@@ -19,24 +19,13 @@ class EctiviModel {
     
     var sections: [String] = ["Today", "Yesterday"]
     
+    var counter = 0
+    
     var total = 0
     
     var entryAmmount = 200
     
     func addWaterEntry() {
-        let date = NSDate()
-        let calendar = NSCalendar.current
-        let day = calendar.component(.day, from: date as Date)
-        let hour = calendar.component(.hour, from: date as Date)
-        let minutes = calendar.component(.minute, from: date as Date)
-        if history.count >= 1 {
-            if String(day) != history[0].day {
-                history.insert((String(day), []), at: 0)
-            }
-        } else {
-            history.insert((String(day), []), at: 0)
-        }
-        history[0].list.insert(("\(hour).\(minutes)", entryAmmount), at: 0)
         total += entryAmmount
     }
     
@@ -52,6 +41,22 @@ class EctiviModel {
         } catch {
             print("Error while inserting in insertEntry")
         }
+        let database = self.getEntries(context: context) as! [NSManagedObject]
+        
+        let (day, time) = self.processEntry(entry: database[counter])
+            
+        if day == self.history[0].day {
+                
+            self.history[0].list.insert((time, database[counter].value(forKey: "ammount") as! Int), at: 0)
+                
+        } else {
+                
+            self.history.insert((String(day), []), at: 0)
+                
+            self.history[0].list.insert((time, database[counter].value(forKey: "ammount") as! Int), at: 0)
+                
+        }
+        counter += 1
     }
     
     func getEntries(context: NSManagedObjectContext) -> [Any] {

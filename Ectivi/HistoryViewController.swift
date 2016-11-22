@@ -23,8 +23,6 @@ class HistoryViewController: UITableViewController {
         self.tableView.rowHeight = 60
         self.tableView.separatorStyle = .none
         
-        print("history \(model.history)")
-        
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
 
@@ -56,7 +54,16 @@ class HistoryViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let date = NSDate()
+        let calendar = NSCalendar.current
         
+        let day = "\(calendar.component(.month, from: date as Date)).\(calendar.component(.day, from: date as Date)).\(calendar.component(.year, from: date as Date))"
+        let yesterday = "\(calendar.component(.month, from: date as Date)).\(calendar.component(.day, from: date as Date) - 1).\(calendar.component(.year, from: date as Date))"
+        if model.history[section].day == day {
+            return "Today"
+        } else if model.history[section].day == yesterday{
+            return "Yesterday"
+        }
         return model.history[section].day
     }
     
@@ -82,26 +89,11 @@ class HistoryViewController: UITableViewController {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            model.history[indexPath.section].list.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            if model.history[indexPath.section].list.isEmpty {
-                let indexSet = NSMutableIndexSet()
-                indexSet.add(indexPath.section)
-                model.history.remove(at: indexPath.section)
-                tableView.deleteSections(indexSet as IndexSet, with: .fade)
-            }
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            self.model.removeEntry(index: indexPath.row)
+
             self.model.history[indexPath.section].list.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             if self.model.history[indexPath.section].list.isEmpty {
@@ -118,7 +110,7 @@ class HistoryViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        if model.history.count > 0 {
+        if model.history.count > 1 {
             self.table.isHidden = false;
             self.emptyLabel.isHidden = true;
         } else {
