@@ -13,6 +13,7 @@
 		C62CDDA11DB2DEDB003E30E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C62CDD9F1DB2DEDB003E30E2 /* Main.storyboard */; };
 		C62CDDA31DB2DEDB003E30E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C62CDDA21DB2DEDB003E30E2 /* Assets.xcassets */; };
 		C62CDDA61DB2DEDB003E30E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C62CDDA41DB2DEDB003E30E2 /* LaunchScreen.storyboard */; };
+		C667B75D1DE345BD00ECBFEC /* database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C667B75B1DE345BD00ECBFEC /* database.xcdatamodeld */; };
 		C6F1D9131DD757F40016FE43 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1D9121DD757F40016FE43 /* HistoryViewController.swift */; };
 		C6F1D9151DD765060016FE43 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1D9141DD765060016FE43 /* CustomTableViewCell.swift */; };
 		C6F1D93A1DE083850016FE43 /* EctiviModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F1D9391DE083850016FE43 /* EctiviModel.swift */; };
@@ -27,6 +28,7 @@
 		C62CDDA21DB2DEDB003E30E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C62CDDA51DB2DEDB003E30E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C62CDDA71DB2DEDB003E30E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C667B75C1DE345BD00ECBFEC /* database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = database.xcdatamodel; sourceTree = "<group>"; };
 		C6F1D9121DD757F40016FE43 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		C6F1D9141DD765060016FE43 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		C6F1D9391DE083850016FE43 /* EctiviModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EctiviModel.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				C62CDD9F1DB2DEDB003E30E2 /* Main.storyboard */,
 				C6F1D9121DD757F40016FE43 /* HistoryViewController.swift */,
 				C6F1D9391DE083850016FE43 /* EctiviModel.swift */,
+				C667B75B1DE345BD00ECBFEC /* database.xcdatamodeld */,
 			);
 			path = Ectivi;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 				C6F1D93A1DE083850016FE43 /* EctiviModel.swift in Sources */,
 				C620B1631DB7D9A400E09B5D /* extensions.swift in Sources */,
 				C6F1D9131DD757F40016FE43 /* HistoryViewController.swift in Sources */,
+				C667B75D1DE345BD00ECBFEC /* database.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +332,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C667B75B1DE345BD00ECBFEC /* database.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C667B75C1DE345BD00ECBFEC /* database.xcdatamodel */,
+			);
+			currentVersion = C667B75C1DE345BD00ECBFEC /* database.xcdatamodel */;
+			path = database.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C62CDD901DB2DEDB003E30E2 /* Project object */;
 }

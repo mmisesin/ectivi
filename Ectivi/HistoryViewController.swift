@@ -14,48 +14,66 @@ class HistoryViewController: UITableViewController {
     
     var model: EctiviModel = EctiviModel()
     
+    @IBOutlet weak var emptyLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tableView.sectionHeaderHeight = 60
+        self.tableView.rowHeight = 60
+        self.tableView.separatorStyle = .none
+        
+        print("history \(model.history)")
+        
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
-        table.backgroundColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        //self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    @IBOutlet weak var ammountLabel: UILabel!
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return model.sections.count
+        if !model.history.isEmpty {
+            return model.history.count
+        }
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return model.history[section].count
+        if !model.history.isEmpty {
+            return model.history[section].list.count
+        }
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.sections[section]
+        
+        return model.history[section].day
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        // This changes the header background
+        view.tintColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
+    
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let entry = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomTableViewCell
-        
-        // Configure the cell
-        entry.time.text = model.history[indexPath.section][indexPath.row].time
-        entry.ammount.text = String(model.history[indexPath.section][indexPath.row].ammount) + " ml"
-        entry
-            .backgroundColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
+        let entry = self.table.dequeueReusableCell(withIdentifier: "HistoryCell") as! CustomTableViewCell
 
+        // Configure the cell
+
+        entry.time.text = model.history[indexPath.section].list[indexPath.row].time
+        entry.ammount.text = String(model.history[indexPath.section].list[indexPath.row].ammount) + " ml"
         return entry
     }
 
@@ -69,13 +87,46 @@ class HistoryViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            model.history[indexPath.section].remove(at: indexPath.row)
+            model.history[indexPath.section].list.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            if model.history[indexPath.section].list.isEmpty {
+                let indexSet = NSMutableIndexSet()
+                indexSet.add(indexPath.section)
+                model.history.remove(at: indexPath.section)
+                tableView.deleteSections(indexSet as IndexSet, with: .fade)
+            }
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            self.model.history[indexPath.section].list.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            if self.model.history[indexPath.section].list.isEmpty {
+                let indexSet = NSMutableIndexSet()
+                indexSet.add(indexPath.section)
+                self.model.history.remove(at: indexPath.section)
+                tableView.deleteSections(indexSet as IndexSet, with: .fade)
+            }
+        }
+        
+        delete.backgroundColor = UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1)
+        
+        return [delete]
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
+        if model.history.count > 0 {
+            self.table.isHidden = false;
+            self.emptyLabel.isHidden = true;
+        } else {
+            self.table.isHidden = true;
+            self.emptyLabel.isHidden = false;
+        }
+    }
+    
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

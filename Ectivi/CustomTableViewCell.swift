@@ -10,8 +10,9 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var ammount: UILabel!
     @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var ammount: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
