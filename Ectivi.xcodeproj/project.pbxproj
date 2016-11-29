@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C620B1631DB7D9A400E09B5D /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C620B1621DB7D9A400E09B5D /* extensions.swift */; };
+		C62A63161DE6C983005F9B35 /* DiagramCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62A63151DE6C983005F9B35 /* DiagramCircleView.swift */; };
 		C62CDD9C1DB2DEDB003E30E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62CDD9B1DB2DEDB003E30E2 /* AppDelegate.swift */; };
 		C62CDD9E1DB2DEDB003E30E2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62CDD9D1DB2DEDB003E30E2 /* MainViewController.swift */; };
 		C62CDDA11DB2DEDB003E30E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C62CDD9F1DB2DEDB003E30E2 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		C620B1621DB7D9A400E09B5D /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = extensions.swift; path = ../extensions.swift; sourceTree = "<group>"; };
+		C62A63151DE6C983005F9B35 /* DiagramCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagramCircleView.swift; sourceTree = "<group>"; };
 		C62CDD981DB2DEDB003E30E2 /* Ectivi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ectivi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C62CDD9B1DB2DEDB003E30E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C62CDD9D1DB2DEDB003E30E2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				C6F1D9121DD757F40016FE43 /* HistoryViewController.swift */,
 				C6F1D9391DE083850016FE43 /* EctiviModel.swift */,
 				C667B75B1DE345BD00ECBFEC /* database.xcdatamodeld */,
+				C62A63151DE6C983005F9B35 /* DiagramCircleView.swift */,
 			);
 			path = Ectivi;
 			sourceTree = "<group>";
@@ -119,6 +122,7 @@
 				TargetAttributes = {
 					C62CDD971DB2DEDB003E30E2 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 67459ZGRXW;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -159,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C62A63161DE6C983005F9B35 /* DiagramCircleView.swift in Sources */,
 				C62CDD9E1DB2DEDB003E30E2 /* MainViewController.swift in Sources */,
 				C6F1D9151DD765060016FE43 /* CustomTableViewCell.swift in Sources */,
 				C62CDD9C1DB2DEDB003E30E2 /* AppDelegate.swift in Sources */,
@@ -290,7 +295,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 67459ZGRXW;
 				INFOPLIST_FILE = Ectivi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Artem-Misesin.Ectivi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -302,7 +309,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 67459ZGRXW;
 				INFOPLIST_FILE = Ectivi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Artem-Misesin.Ectivi";
 				PRODUCT_NAME = "$(TARGET_NAME)";

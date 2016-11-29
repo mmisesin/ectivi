@@ -14,11 +14,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var model: EctiviModel = EctiviModel()
     
+    @IBOutlet weak var circle: DiagramCircleView! {
+        didSet {
+            circle.ammount = model.total
+        }
+    }
+    
+    @IBOutlet weak var buttonConstraint: NSLayoutConstraint!
+    
     @IBOutlet var mainView: UIView!
     
     @IBOutlet weak var addButton: UIButton!
     
     @IBOutlet weak var mainIndicator: UILabel!
+    @IBOutlet weak var goalDone: UILabel!
     
     @IBOutlet weak var goalLabel: UILabel!
     
@@ -34,6 +43,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         startConfiguration()
         historyPreview.reloadData()
+        if model.history.count == 2 && model.history[0].list.count == 1 {
+            slide(button: addButton, direction: "Down")
+            fade(table: historyPreview, direction: "In")
+        }
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,8 +74,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        circle.ammount = model.total
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
         model.context = appDelegate.persistentContainer.viewContext
         
         if let context = model.context {
@@ -86,7 +99,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             }
         }
-                // Do any additional setup after loading the view, typically from a nib.
+        // Do any additional setup after loading the view, typically from a nib.
         UINavigationBar.appearance().tintColor = UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1)
         historyPreview.backgroundColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
         mainView.backgroundColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
@@ -96,9 +109,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             
-            self.model.removeEntry(index: indexPath.row)
-            
-            self.model.history[indexPath.section].list.remove(at: indexPath.row)
+            self.model.removeEntry(indexPath: indexPath)
             
             tableView.deleteRows(at: [indexPath], with: .fade)
             
@@ -106,6 +117,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 self.model.history.remove(at: indexPath.section)
                 
+            }
+            
+            if self.model.history.count == 1 {
+                self.fade(table: self.historyPreview, direction: "Out")
+                self.slide(button: self.addButton, direction: "Up")
             }
             
             self.startConfiguration()
@@ -144,10 +160,24 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         model.total = totalTemp
         mainIndicator.text = "\(model.total) ml"
         if model.goal <= model.total {
-            goalLabel.text = "You're good for today. \n Well done"
+            goalLabel.isHidden = true
+            mainIndicator.isHidden = true
+            goalDone.isHidden = false
         } else {
+            mainIndicator.isHidden = false
+            goalLabel.isHidden = false
             goalLabel.text = "\(model.goal - model.total) ml to go"
+            goalDone.isHidden = true
         }
+        if model.history.count == 1 {
+            addButton.center.y -= 150
+            historyPreview.alpha = 0
+            buttonConstraint.constant = 204
+        } else {
+            historyPreview.alpha = 1
+            buttonConstraint.constant = 54
+        }
+        circle.ammount = model.total
         
     }
     
@@ -157,7 +187,37 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             history?.model = self.model
         }
     }
-
-
+    
+    func slide(button: UIButton, direction: String) {
+        switch direction {
+        case "Up":
+            UIView.animate(withDuration: 1, animations: {
+                button.center.y -= 150
+            })
+            buttonConstraint.constant = 204
+        case "Down":
+            UIView.animate(withDuration: 1, animations: {
+                button.center.y += 150
+            })
+            buttonConstraint.constant = 54
+        default: break
+        }
+    }
+    
+    func fade(table: UITableView, direction: String) {
+        switch direction {
+        case "Out":
+            table.alpha = 1
+            UIView.animate(withDuration: 0.5, animations: {
+                table.alpha = 0
+        })
+        case "In":
+            table.alpha = 0
+            UIView.animate(withDuration: 1, animations: {
+                table.alpha = 1
+        })
+        default: break
+        }
+    }
 }
 

@@ -13,6 +13,9 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var ammount: UILabel!
     
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
