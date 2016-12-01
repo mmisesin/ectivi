@@ -42,6 +42,7 @@ class HistoryViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
 
+        navigationController?.navigationBar.barTintColor = UIColor.white
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         //self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
@@ -89,7 +90,7 @@ class HistoryViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
         // This changes the header background
-        view.tintColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
+        view.tintColor = UIColor.white
     
     }
     

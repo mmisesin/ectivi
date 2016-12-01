@@ -30,7 +30,7 @@
                                     <constraint firstAttribute="width" secondItem="hfM-t4-fF8" secondAttribute="height" multiplier="131:80" id="eE2-5f-8kz"/>
                                 </constraints>
                                 <color key="sectionIndexColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="sectionIndexBackgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MainCell" id="IjW-sW-3FR" customClass="CustomTableViewCell" customModule="Ectivi" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="263" height="44"/>
@@ -55,7 +55,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.87049323320388794" green="0.87064296007156372" blue="0.87048381567001343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="Gg6-0N-Ibz" firstAttribute="baseline" secondItem="huv-o2-hU6" secondAttribute="baseline" id="3EW-jD-J51"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Gg6-0N-Ibz" secondAttribute="trailing" constant="50" id="Ik9-e9-Zmx"/>
@@ -118,7 +118,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.87049323320388794" green="0.87064296007156372" blue="0.87048381567001343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="mmG-iz-9iG" firstAttribute="centerX" secondItem="g2P-9a-xRJ" secondAttribute="centerX" id="AUZ-Bl-hwN"/>
                                     <constraint firstItem="pkH-as-Amd" firstAttribute="centerY" secondItem="g2P-9a-xRJ" secondAttribute="centerY" constant="-1.5" id="Xqe-TV-2lG"/>
@@ -150,7 +150,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.87049323320388794" green="0.87064296007156372" blue="0.87048381567001343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="hfM-t4-fF8" firstAttribute="top" secondItem="g2P-9a-xRJ" secondAttribute="bottom" constant="20" id="0xL-Lz-0Ti"/>
                             <constraint firstItem="hfM-t4-fF8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="40" id="3c3-Lc-9ma"/>
@@ -199,7 +199,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <color key="sectionIndexBackgroundColor" red="0.87049323320388794" green="0.87064296007156372" blue="0.87048381567001343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryCell" rowHeight="60" id="qj5-aP-IRf" customClass="CustomTableViewCell" customModule="Ectivi" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
@@ -229,7 +229,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.87049323320388794" green="0.87064296007156372" blue="0.87048381567001343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="acp-2I-udP" firstAttribute="leading" secondItem="rRT-mI-Sl2" secondAttribute="leadingMargin" constant="22" id="0j0-Hg-TLA"/>
                                                 <constraint firstItem="acp-2I-udP" firstAttribute="top" secondItem="rRT-mI-Sl2" secondAttribute="topMargin" constant="12" id="5hK-wc-HES"/>
@@ -251,11 +251,11 @@
                                     <constraint firstAttribute="height" constant="91" id="yDm-ZR-2ez"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.30344462389999999" green="0.432104826" blue="0.7308880687" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.87049323320388794" green="0.87064296007156372" blue="0.87048381567001343" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="BAw-QT-oq5" firstAttribute="leading" secondItem="H9O-P0-sij" secondAttribute="leadingMargin" constant="9" id="0sV-OL-2RO"/>
                             <constraint firstItem="Rqr-c2-obI" firstAttribute="leading" secondItem="H9O-P0-sij" secondAttribute="leading" id="Cri-wj-qo7"/>

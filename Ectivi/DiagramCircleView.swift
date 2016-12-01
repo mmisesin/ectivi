@@ -77,7 +77,7 @@ class DiagramCircleView: UIView {
     
     func drawTicks(context: CGContext, tickCount: Int, center: CGPoint, startRadius: CGFloat, endRadius: CGFloat, ticksToColor: Int) {
         for i in 0 ... tickCount {
-            let color: UIColor = i < ticksToColor ? UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1) : .lightGray
+            let color: UIColor = i < ticksToColor ? UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1) : UIColor(red:0.90, green:0.91, blue:0.94, alpha:1.00)
             context.setStrokeColor(color.cgColor)
             let angle = .pi - degree2Radian(a: (CGFloat(360.0) / CGFloat(tickCount)) * CGFloat(i))
             let path = CGMutablePath()

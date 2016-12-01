@@ -101,8 +101,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         // Do any additional setup after loading the view, typically from a nib.
         UINavigationBar.appearance().tintColor = UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1)
-        historyPreview.backgroundColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
-        mainView.backgroundColor = UIColor(red: 0.87, green: 0.87, blue: 0.87, alpha: 1)
+        historyPreview.backgroundColor = UIColor.white
+        mainView.backgroundColor = UIColor.white
         addButton.backgroundColor = UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1)
     }
     
