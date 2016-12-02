@@ -104,6 +104,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         historyPreview.backgroundColor = UIColor.white
         mainView.backgroundColor = UIColor.white
         addButton.backgroundColor = UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1)
+        checkEmpty()
+        self.historyPreview.tableFooterView = UIView()
+        self.view.sendSubview(toBack: self.historyPreview)
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -125,10 +128,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             self.startConfiguration()
-            
+            self.checkEmpty()
         }
-        
-        delete.backgroundColor = UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1)
         
         return [delete]
     }
@@ -170,14 +171,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             goalDone.isHidden = true
         }
         if model.history.count == 1 {
-            addButton.center.y -= 150
+            addButton.center.y -= 159
             historyPreview.alpha = 0
-            buttonConstraint.constant = 204
+            buttonConstraint.constant = 191
         } else {
             historyPreview.alpha = 1
-            buttonConstraint.constant = 54
+            buttonConstraint.constant = 32
         }
         circle.ammount = model.total
+        checkEmpty()
         
     }
     
@@ -192,31 +194,39 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch direction {
         case "Up":
             UIView.animate(withDuration: 1, animations: {
-                button.center.y -= 150
+                button.center.y -= 159
             })
-            buttonConstraint.constant = 204
+            buttonConstraint.constant = 191
         case "Down":
             UIView.animate(withDuration: 1, animations: {
-                button.center.y += 150
+                button.center.y += 159
             })
-            buttonConstraint.constant = 54
+            buttonConstraint.constant = 32
         default: break
         }
     }
     
     func fade(table: UITableView, direction: String) {
         switch direction {
-        case "Out":
-            table.alpha = 1
-            UIView.animate(withDuration: 0.5, animations: {
-                table.alpha = 0
-        })
+//        case "Out":
+//            table.alpha = 1
+//            UIView.animate(withDuration: 0.3, animations: {
+//                table.alpha = 0
+//        })
         case "In":
             table.alpha = 0
-            UIView.animate(withDuration: 1, animations: {
+            UIView.animate(withDuration: 1.5, animations: {
                 table.alpha = 1
         })
         default: break
+        }
+    }
+    
+    func checkEmpty() {
+        if model.history.count > 1 {
+            self.historyPreview.separatorStyle = .singleLine
+        } else {
+            self.historyPreview.separatorStyle = .none
         }
     }
 }
