@@ -20,7 +20,7 @@ class HistoryViewController: UITableViewController {
         super.viewDidLoad()
 
         self.tableView.sectionHeaderHeight = 60
-        self.tableView.rowHeight = 60
+        self.tableView.rowHeight = 72
         
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
