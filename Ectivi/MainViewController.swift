@@ -104,6 +104,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         historyPreview.backgroundColor = UIColor.white
         mainView.backgroundColor = UIColor.white
         addButton.backgroundColor = UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1)
+        checkEmpty()
+        self.historyPreview.tableFooterView = UIView()
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -125,10 +127,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             self.startConfiguration()
-            
+            self.checkEmpty()
         }
-        
-        delete.backgroundColor = UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1)
         
         return [delete]
     }
@@ -178,6 +178,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             buttonConstraint.constant = 54
         }
         circle.ammount = model.total
+        checkEmpty()
         
     }
     
@@ -217,6 +218,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 table.alpha = 1
         })
         default: break
+        }
+    }
+    
+    func checkEmpty() {
+        if model.history.count > 1 {
+            self.historyPreview.separatorStyle = .singleLine
+        } else {
+            self.historyPreview.separatorStyle = .none
         }
     }
 }

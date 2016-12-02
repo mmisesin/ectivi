@@ -16,28 +16,11 @@ class HistoryViewController: UITableViewController {
     
     @IBOutlet weak var emptyLabel: UILabel!
     
-    
-    @IBAction func deleteButton(_ sender: UIButton) {
-        _ = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.model.removeEntry(indexPath: indexPath)
-            self.table.deleteRows(at: [indexPath], with: .fade)
-            if self.model.history[indexPath.section].list.isEmpty {
-                let indexSet = NSMutableIndexSet()
-                indexSet.add(indexPath.section)
-                self.model.history.remove(at: indexPath.section)
-                self.table.deleteSections(indexSet as IndexSet, with: .fade)
-            }
-        }
-    }
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tableView.sectionHeaderHeight = 60
         self.tableView.rowHeight = 60
-        self.tableView.separatorStyle = .none
         
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
@@ -45,6 +28,8 @@ class HistoryViewController: UITableViewController {
         navigationController?.navigationBar.barTintColor = UIColor.white
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.tableView.tableFooterView = UIView()
+        checkEmpty()
     }
 
     override func didReceiveMemoryWarning() {
@@ -101,8 +86,6 @@ class HistoryViewController: UITableViewController {
 
         entry.time.text = model.history[indexPath.section].list[indexPath.row].time
         entry.ammount.text = String(model.history[indexPath.section].list[indexPath.row].ammount) + " ml"
-//        entry.deleteButton.tag = indexPath.row;
-//        entry.deleteButton.addTarget(self, action: "deleteButton:", for: .touchUpInside)
         return entry
     }
 
@@ -122,27 +105,28 @@ class HistoryViewController: UITableViewController {
                 self.model.history.remove(at: indexPath.section)
                 tableView.deleteSections(indexSet as IndexSet, with: .fade)
             }
+            self.checkEmpty()
         }
-        if model.history.count == 1{
-            self.table.isHidden = true;
-            self.emptyLabel.isHidden = false;
-        }
-        
-        delete.backgroundColor = UIColor(red: 0.49, green: 0.62, blue: 0.96, alpha: 1)
-        
         return [delete]
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        if model.history.count > 1 {
-            self.table.isHidden = false;
-            self.emptyLabel.isHidden = true;
-        } else {
-            self.table.isHidden = true;
-            self.emptyLabel.isHidden = false;
-        }
+        checkEmpty()
     }
     
+    func checkEmpty() {
+        if model.history.count > 1 {
+            self.tableView.separatorStyle = .singleLine
+            self.table.isHidden = false;
+            self.emptyLabel.isHidden = true;
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+        } else {
+            self.tableView.separatorStyle = .none
+            self.table.isHidden = true;
+            self.emptyLabel.isHidden = false;
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+    }
     
     /*
     // Override to support rearranging the table view.
