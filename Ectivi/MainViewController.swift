@@ -9,8 +9,30 @@
 import UIKit
 import CoreData
 
-@IBDesignable
+class Glass: IDrinkable{
+    var model: EctiviModel = EctiviModel()
+    func changeAmmount() {
+        model.entryAmmount = 400
+    }
+}
+
+class Cup: IDrinkable{
+    var model: EctiviModel = EctiviModel()
+    func changeAmmount() {
+        model.entryAmmount = 200
+    }
+}
+
+class Bottle: IDrinkable{
+    var model: EctiviModel = EctiviModel()
+    func changeAmmount() {
+        model.entryAmmount = 800
+    }
+}
+
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var drinkable: IDrinkable = IDrinkable()
     
     var model: EctiviModel = EctiviModel()
     

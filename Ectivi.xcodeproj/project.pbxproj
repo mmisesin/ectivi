@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C620B1631DB7D9A400E09B5D /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C620B1621DB7D9A400E09B5D /* extensions.swift */; };
+		C6265CFF1DF572E4008DC043 /* IDrinkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6265CFE1DF572E4008DC043 /* IDrinkable.swift */; };
 		C62A63161DE6C983005F9B35 /* DiagramCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62A63151DE6C983005F9B35 /* DiagramCircleView.swift */; };
 		C62CDD9C1DB2DEDB003E30E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62CDD9B1DB2DEDB003E30E2 /* AppDelegate.swift */; };
 		C62CDD9E1DB2DEDB003E30E2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62CDD9D1DB2DEDB003E30E2 /* MainViewController.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		C620B1621DB7D9A400E09B5D /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = extensions.swift; path = ../extensions.swift; sourceTree = "<group>"; };
+		C6265CFE1DF572E4008DC043 /* IDrinkable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDrinkable.swift; sourceTree = "<group>"; };
 		C62A63151DE6C983005F9B35 /* DiagramCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagramCircleView.swift; sourceTree = "<group>"; };
 		C62CDD981DB2DEDB003E30E2 /* Ectivi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ectivi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C62CDD9B1DB2DEDB003E30E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				C6F1D9391DE083850016FE43 /* EctiviModel.swift */,
 				C667B75B1DE345BD00ECBFEC /* database.xcdatamodeld */,
 				C62A63151DE6C983005F9B35 /* DiagramCircleView.swift */,
+				C6265CFE1DF572E4008DC043 /* IDrinkable.swift */,
 			);
 			path = Ectivi;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				C62CDD9C1DB2DEDB003E30E2 /* AppDelegate.swift in Sources */,
 				C6F1D93A1DE083850016FE43 /* EctiviModel.swift in Sources */,
 				C620B1631DB7D9A400E09B5D /* extensions.swift in Sources */,
+				C6265CFF1DF572E4008DC043 /* IDrinkable.swift in Sources */,
 				C6F1D9131DD757F40016FE43 /* HistoryViewController.swift in Sources */,
 				C667B75D1DE345BD00ECBFEC /* database.xcdatamodeld in Sources */,
 			);
