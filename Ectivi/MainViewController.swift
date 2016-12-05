@@ -34,6 +34,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var historyPreview: UITableView!
     
     @IBAction func entryButton() {
+        model.entryAmmount = 200
         model.addWaterEntry()
         
         if let context = model.context {
@@ -74,6 +75,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let longpressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.longpress(gestureRecognizer:)))
+        
+        longpressGestureRecognizer.minimumPressDuration = 1
+        
+    addButton.addGestureRecognizer(longpressGestureRecognizer)
         circle.ammount = model.total
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         model.context = appDelegate.persistentContainer.viewContext
@@ -129,6 +135,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             self.startConfiguration()
             self.checkEmpty()
+            self.historyPreview.reloadData()
         }
         
         return [delete]
@@ -152,10 +159,19 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func startConfiguration() {
+        let formatter = DateFormatter()
+        
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        
+        _ = NSDate()
+        
+        //let today = formatter.string(from: currentDate as Date)
+        
         var totalTemp = 0
-        if model.history.count != 0 {
+        if model.history.count != 0 && !model.history[0].list.isEmpty {
             for (_, entryAmmount) in model.history[0].list {
-                totalTemp += entryAmmount
+            totalTemp += entryAmmount
             }
         }
         model.total = totalTemp
@@ -164,7 +180,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             goalLabel.isHidden = true
             mainIndicator.isHidden = true
             goalDone.isHidden = false
+            self.addButton.isEnabled = false
+            self.addButton.alpha = 0.5
         } else {
+            self.addButton.isEnabled = true
+            self.addButton.alpha = 1
             mainIndicator.isHidden = false
             goalLabel.isHidden = false
             goalLabel.text = "\(model.goal - model.total) ml to go"
@@ -228,6 +248,53 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             self.historyPreview.separatorStyle = .none
         }
+    }
+    
+    func longpress(gestureRecognizer: UIGestureRecognizer) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let firstNumber = UIAlertAction(title: "Drink 400ml", style: .default) { (action) in
+            self.model.entryAmmount = 400
+            self.model.addWaterEntry()
+            
+            if let context = self.model.context {
+                
+                self.model.insertEntry(ammount: self.model.entryAmmount, context: context)
+                
+            }
+            self.startConfiguration()
+            self.historyPreview.reloadData()
+            if self.model.history.count == 2 && self.model.history[0].list.count == 1 {
+                self.slide(button: self.addButton, direction: "Down")
+                self.fade(table: self.historyPreview, direction: "In")
+            }
+        }
+        alertController.addAction(firstNumber)
+        
+        let secondNumber = UIAlertAction(title: "Drink 800ml", style: .default) { (action) in
+            self.model.entryAmmount = 800
+            self.model.addWaterEntry()
+            
+            if let context = self.model.context {
+                
+                self.model.insertEntry(ammount: self.model.entryAmmount, context: context)
+                
+            }
+            self.startConfiguration()
+            self.historyPreview.reloadData()
+            if self.model.history.count == 2 && self.model.history[0].list.count == 1 {
+                self.slide(button: self.addButton, direction: "Down")
+                self.fade(table: self.historyPreview, direction: "In")
+            }
+        }
+        alertController.addAction(secondNumber)
+        
+        self.present(alertController, animated: true)
     }
 }
 

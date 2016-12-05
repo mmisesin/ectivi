@@ -27,7 +27,7 @@
                                 <rect key="frame" x="16" y="335" width="343" height="184"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="hfM-t4-fF8" secondAttribute="height" multiplier="131:80" constant="41.699999999999989" id="eE2-5f-8kz"/>
+                                    <constraint firstAttribute="height" constant="184" id="Aim-e6-8Fs"/>
                                 </constraints>
                                 <color key="sectionIndexColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -40,13 +40,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gg6-0N-Ibz">
-                                                    <rect key="frame" x="20" y="25.5" width="276.5" height="21"/>
+                                                    <rect key="frame" x="20" y="25.5" width="265" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huv-o2-hU6">
-                                                    <rect key="frame" x="228.5" y="25.5" width="118" height="21"/>
+                                                    <rect key="frame" x="217" y="25.5" width="118" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="118" id="DGH-ss-Zmj"/>
                                                     </constraints>
@@ -87,7 +87,7 @@
                                 <state key="normal" image="icon-gear"/>
                             </button>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAM-ES-M6i">
-                                <rect key="frame" x="62" y="579" width="250" height="56"/>
+                                <rect key="frame" x="62.5" y="579" width="250" height="56"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="V0m-gI-cEe"/>
@@ -204,7 +204,7 @@
                                 <color key="sectionIndexBackgroundColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryCell" rowHeight="60" id="qj5-aP-IRf" customClass="CustomTableViewCell" customModule="Ectivi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qj5-aP-IRf" id="rRT-mI-Sl2">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>

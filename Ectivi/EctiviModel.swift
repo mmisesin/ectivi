@@ -23,7 +23,7 @@ class EctiviModel {
     
     var total = 0
     
-    var entryAmmount = 200
+    var entryAmmount = 0
     
     func addWaterEntry() {
         total += entryAmmount

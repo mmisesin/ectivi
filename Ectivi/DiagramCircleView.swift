@@ -65,7 +65,7 @@ class DiagramCircleView: UIView {
             ammount += entry.ammount
         }
         let graphicalAmmount = ammount / 20
-        drawTicks(context: ctx!, tickCount: 100, center: circleCenter, startRadius: circleRadius - 3, endRadius: circleRadius - 12, ticksToColor: graphicalAmmount)
+        drawTicks(context: ctx!, tickCount: 99, center: circleCenter, startRadius: circleRadius - 3, endRadius: circleRadius - 12, ticksToColor: graphicalAmmount)
         color = UIColor(red: 0.96, green: 0.97, blue: 0.98, alpha: 1)
         color.set()
         pathForCircleCenteredAtPoint(midPoint: circleCenter, withRadius: circleRadius - 15).stroke()
